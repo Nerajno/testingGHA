@@ -3,7 +3,7 @@ name: Update QA/Testing from main
 on:
   schedule:
     # Runs at a specific time
-    - cron: '10 11 * * 1-5'
+    - cron: '30 14 * * 1-5'
   push:
     branches: [ main ]
   pull_request:
