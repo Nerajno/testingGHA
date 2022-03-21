@@ -1,0 +1,7 @@
+name: Update QA/Testing from main
+
+on:
+  schedule:
+    # Runs at a specific time
+    - cron: '10 11 * * 1-5'
+  
