@@ -6,8 +6,8 @@ on:
   #   - cron: '30 14 * * 1-5'
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ otherBranch ]
+  # pull_request:
+  #   branches: [ otherBranch ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -15,6 +15,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Push to Other Branch
     steps:
       - name: git-checkout
         uses: actions/checkout@v2
@@ -24,5 +25,6 @@ jobs:
         env:
           REPO: self
           BRANCH: otherBranch # The branch name where you want to push the assets
+          FOLDER: build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-         # MESSAGE: "Build: ({sha}) {msg}" # The commit message
+          MESSAGE: "Commit: ({sha}) {msg}" # The commit message
