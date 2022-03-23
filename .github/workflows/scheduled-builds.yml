@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Push to Other Branch
     steps:
-      - name: git-checkout
-        uses: actions/checkout@v2
+      # - name: git-checkout
+      #   uses: actions/checkout@v2
     
       - name: Push
         uses: s0/git-publish-subdir-action@develop
