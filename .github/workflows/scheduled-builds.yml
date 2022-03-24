@@ -29,11 +29,47 @@ name: Update QA/Testing from main
 #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
 #           MESSAGE: "Commit: ({sha}) {msg}" # The commit message
 
+# on:
+  # push:
+  #   branches:
+  #     - '*'
+#    schedule:
+#    - cron: "28 10 * * *"
+# jobs:
+#   sync-branch:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@master
+
+#       - name: Merge main -> otherBranch
+#         uses: devmasx/merge-branch@master
+#         with:
+#           type: now
+#           from_branch: main
+#           target_branch: otherBranch
+#           github_token: ${{ github.token }}
+
+      # - name: Merge staging -> uat
+      #   uses: devmasx/merge-branch@master
+      #   with:
+      #     type: now
+      #     from_branch: staging
+      #     target_branch: uat
+      #     github_token: ${{ github.token }}
+
+# name: Update QA/Testing from Dev
+
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
-      - '*'
+      - 'main'
+
 jobs:
+  # runs-on: ubuntu-latest
+  # build:
+  #   if: github.event.pull_request.merged == 'true'
+
   sync-branch:
     runs-on: ubuntu-latest
     steps:
@@ -45,12 +81,6 @@ jobs:
           type: now
           from_branch: main
           target_branch: otherBranch
-          github_token: ${{ github.token }}
+          github_token: ${{ github.token }}      
 
-      # - name: Merge staging -> uat
-      #   uses: devmasx/merge-branch@master
-      #   with:
-      #     type: now
-      #     from_branch: staging
-      #     target_branch: uat
-      #     github_token: ${{ github.token }}
+    
