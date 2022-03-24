@@ -30,9 +30,13 @@ name: Update QA/Testing from main
 #           MESSAGE: "Commit: ({sha}) {msg}" # The commit message
 
 on:
-  push:
-    branches:
+  schedule:
+  # Runs at a specific time
+    - cron: '10 21 * * *'
+  branches:
       - '*'
+
+
 jobs:
   sync-branch:
     runs-on: ubuntu-latest
