@@ -32,7 +32,10 @@ name: Update QA/Testing from main
 on:
   schedule:
   # Runs at a specific time
-    - cron: '18 21 * * *'
+    - cron: '10 21 * * *'
+  branches:
+      - '*'
+
 
 jobs:
   sync-branch:
