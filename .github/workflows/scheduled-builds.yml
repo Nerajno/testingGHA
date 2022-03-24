@@ -57,7 +57,7 @@ name: Update QA/Testing from main
       #     target_branch: uat
       #     github_token: ${{ github.token }}
 
-      name: Update QA/Testing from Dev
+# name: Update QA/Testing from Dev
 
 on:
   pull_request:
