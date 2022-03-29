@@ -9,10 +9,6 @@ on:
       - 'v*' 
 
 jobs:
-  # runs-on: ubuntu-latest
-  # build:
-  #   if: github.event.pull_request.merged == 'true'
-
   sync-branch:
     runs-on: ubuntu-latest
     steps:
@@ -25,16 +21,14 @@ jobs:
           target_branch: otherBranch
           github_token: ${{ github.token }}      
       
-      - uses: actions/checkout@master
       - name: Get Latest Release
         id: latest_version
         uses: abatilo/release-info-action@v1.3.0
         with:
-          owner: abatilo
-          repo: release-info-action
-      - name: Example of consumption of the output
+          owner: EPM devs
+          repo: EPM_CORE_API
         env:
-          LATEST: ${{ steps.latest_version.outputs.latest_tag }}
+          tag_name: ${{ steps.latest_version.outputs.latest_tag }}
           LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
         run: |
           echo "Version $LATEST was released at $LATEST_DATE"
