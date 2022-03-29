@@ -26,7 +26,7 @@ jobs:
         id: latest_version
         with:
           owner: EPM devs
-          repo: EPM_CORE_API
+          repo: testingGHA
         env:
           LATEST: ${{ steps.latest_version.outputs.latest_tag }}
           LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
