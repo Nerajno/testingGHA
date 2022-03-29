@@ -12,22 +12,18 @@ jobs:
   sync-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@master
       - name: Merge main -> otherBranch
-      - uses: devmasx/merge-branch@master
+        uses: devmasx/merge-branch@master
         with:
           type: now
           from_branch: main
           target_branch: otherBranch
           github_token: ${{ github.token }}   
-
-      - uses: abatilo/release-info-action@v1.3.0    
       - name: Get Latest Release
         id: latest_version
-        with:
-          owner: EPM devs
-          repo: testingGHA
-        env:
-          LATEST: ${{ steps.latest_version.outputs.latest_tag }}
-          LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
-
+        uses: abatilo/release-info-action@v1.3.0
+        with:    
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
