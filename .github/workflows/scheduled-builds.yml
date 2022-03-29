@@ -30,6 +30,4 @@ jobs:
         env:
           tag_name: ${{ steps.latest_version.outputs.latest_tag }}
           LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
-        run: |
-          echo "Version $LATEST was released at $LATEST_DATE"
-    
+
