@@ -1,42 +1,23 @@
-
-   
-name: Update QA/Testing from main
+name: Publish Release
 
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - 'main'
-    tags: 
-      - 'v*' 
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
-  # runs-on: ubuntu-latest
-  # build:
-  #   if: github.event.pull_request.merged == 'true'
-
-  sync-branch:
+  build:
+    name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Merge main -> otherBranch
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          from_branch: main
-          target_branch: otherBranch
-          github_token: ${{ github.token }}      
-      
-      - uses: actions/checkout@master
-      - name: Get Latest Release
-        id: latest_version
-        uses: abatilo/release-info-action@v1.3.0
-        with:
-          owner: abatilo
-          repo: release-info-action
-      - name: Example of consumption of the output
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          LATEST: ${{ steps.latest_version.outputs.latest_tag }}
-          LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
-        run: |
-          echo "Version $LATEST was released at $LATEST_DATE"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
