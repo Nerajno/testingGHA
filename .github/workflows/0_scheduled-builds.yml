@@ -13,9 +13,12 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: pocket-apps/action-update-version@v1
+      - uses: abatilo/release-info-action@v1.3.0    
+      - name: Get Latest Release
+        id: latest_version
         with:
-          files: 'package.json, app.yaml'
-          version-regexp: '\d+.\d+.\d+'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          owner: EPM devs
+          repo: testingGHA
+        env:
+          LATEST: ${{ steps.latest_version.outputs.latest_tag }}
+          LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
