@@ -1,69 +1,12 @@
 name: Update QA/Testing from main
 
-# on:
-#   # schedule:
-#   #   # Runs at a specific time
-#   #   - cron: '30 14 * * 1-5'
-#   push:
-#     branches: [ main ]
-#   # pull_request:
-#   #   branches: [ otherBranch ]
-
-#   # Allows you to run this workflow manually from the Actions tab
-#   workflow_dispatch:
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     name: Push to Other Branch
-#     steps:
-#       - name: git-checkout
-#         uses: actions/checkout@v2
-    
-#       - name: Push
-#         uses: s0/git-publish-subdir-action@develop
-#         env:
-#           REPO: self
-#           BRANCH: main # The branch name where you want to push the assets
-#           FOLDER: ./
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-#           MESSAGE: "Commit: ({sha}) {msg}" # The commit message
-
-# on:
-  # push:
-  #   branches:
-  #     - '*'
-#    schedule:
-#    - cron: "28 10 * * *"
-# jobs:
-#   sync-branch:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@master
-
-#       - name: Merge main -> otherBranch
-#         uses: devmasx/merge-branch@master
-#         with:
-#           type: now
-#           from_branch: main
-#           target_branch: otherBranch
-#           github_token: ${{ github.token }}
-
-      # - name: Merge staging -> uat
-      #   uses: devmasx/merge-branch@master
-      #   with:
-      #     type: now
-      #     from_branch: staging
-      #     target_branch: uat
-      #     github_token: ${{ github.token }}
-
-# name: Update QA/Testing from Dev
-
 on:
   pull_request:
     types: [closed]
     branches:
       - 'main'
+    tags: 
+      - 'v*' 
 
 jobs:
   # runs-on: ubuntu-latest
@@ -74,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-
       - name: Merge main -> otherBranch
         uses: devmasx/merge-branch@master
         with:
@@ -82,5 +24,19 @@ jobs:
           from_branch: main
           target_branch: otherBranch
           github_token: ${{ github.token }}      
-
+      
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
     
