@@ -5,8 +5,8 @@ on:
     types: [closed]
     branches:
       - 'main'
-    tags: 
-      - 'v*' 
+    # tags: 
+    #   - 'v*' 
 
 jobs:
   sync-branch:
@@ -22,13 +22,12 @@ jobs:
           target_branch: otherBranch
           github_token: ${{ github.token }}   
 
-      - uses: abatilo/release-info-action@v1.3.0    
-      - name: Get Latest Release
-        id: latest_version
-        with:
-          owner: EPM devs
-          repo: testingGHA
-        env:
-          LATEST: ${{ steps.latest_version.outputs.latest_tag }}
-          LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
-
+      # - uses: abatilo/release-info-action@v1.3.0    
+      # - name: Get Latest Release
+      #   id: latest_version
+      #   with:
+      #     owner: EPM devs
+      #     repo: testingGHA
+      #   env:
+      #     LATEST: ${{ steps.latest_version.outputs.latest_tag }}
+      #     LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
