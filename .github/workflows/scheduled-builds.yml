@@ -19,10 +19,11 @@ jobs:
           type: now
           from_branch: main
           target_branch: otherBranch
-          github_token: ${{ github.token }}      
+          github_token: ${{ github.token }}   
+
+      - uses: abatilo/release-info-action@v1.3.0    
       - name: Get Latest Release
         id: latest_version
-      - uses: abatilo/release-info-action@v1.3.0
         with:
           owner: EPM devs
           repo: EPM_CORE_API
