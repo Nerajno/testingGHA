@@ -14,19 +14,20 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Merge main -> otherBranch
-        uses: devmasx/merge-branch@master
+      - uses: devmasx/merge-branch@master
         with:
           type: now
           from_branch: main
           target_branch: otherBranch
-          github_token: ${{ github.token }}      
+          github_token: ${{ github.token }}   
+
+      - uses: abatilo/release-info-action@v1.3.0    
       - name: Get Latest Release
         id: latest_version
-      - uses: abatilo/release-info-action@v1.3.0
         with:
           owner: EPM devs
-          repo: EPM_CORE_API
+          repo: testingGHA
         env:
-          tag_name: ${{ steps.latest_version.outputs.latest_tag }}
+          LATEST: ${{ steps.latest_version.outputs.latest_tag }}
           LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
 
