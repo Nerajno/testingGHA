@@ -12,6 +12,7 @@ jobs:
   sync-branch:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
       - uses: actions/checkout@master
       - name: Merge main -> otherBranch
       - uses: devmasx/merge-branch@master
