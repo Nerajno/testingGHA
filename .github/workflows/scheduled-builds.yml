@@ -20,7 +20,6 @@ jobs:
           from_branch: main
           target_branch: otherBranch
           github_token: ${{ github.token }}      
-      
       - name: Get Latest Release
         id: latest_version
       - uses: abatilo/release-info-action@v1.3.0
@@ -30,6 +29,4 @@ jobs:
         env:
           tag_name: ${{ steps.latest_version.outputs.latest_tag }}
           LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
-        run: |
-          echo "Version $LATEST was released at $LATEST_DATE"
-    
+
