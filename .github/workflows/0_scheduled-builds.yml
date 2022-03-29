@@ -17,7 +17,7 @@ jobs:
         name: Get Latest Release
         id: latest_version
         with:
-          owner: EPM devs
+          owner: nerajno
           repo: testingGHA
         env:
           LATEST: ${{ steps.latest_version.outputs.latest_tag }}
