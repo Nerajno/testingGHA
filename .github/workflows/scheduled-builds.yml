@@ -25,18 +25,17 @@ jobs:
           target_branch: otherBranch
           github_token: ${{ github.token }}      
       
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      - uses: actions/checkout@master
+      - name: Get Latest Release
+        id: latest_version
+        uses: abatilo/release-info-action@v1.3.0
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
+          owner: abatilo
+          repo: release-info-action
+      - name: Example of consumption of the output
+        env:
+          LATEST: ${{ steps.latest_version.outputs.latest_tag }}
+          LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
+        run: |
+          echo "Version $LATEST was released at $LATEST_DATE"
     
