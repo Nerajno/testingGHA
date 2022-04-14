@@ -1,0 +1,19 @@
+{
+  "name": "testinggha",
+  "version": "1.0.0",
+  "description": "testing adding version",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nerajno/testingGHA.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nerajno/testingGHA/issues"
+  },
+  "homepage": "https://github.com/Nerajno/testingGHA#readme"
+}
