@@ -22,4 +22,8 @@ jobs:
         env:
           LATEST: ${{ steps.latest_version.outputs.latest_tag }}
           LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
-      - run : npm version patch
+      - name: Update release
+        uses: johnwbyrd/update-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: ./one-file-you-want-to-release.zip dist/another-file-to-release.exe README.md
