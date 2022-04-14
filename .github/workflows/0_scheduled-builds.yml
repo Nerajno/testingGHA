@@ -19,6 +19,7 @@ jobs:
         with:
           owner: nerajno
           repo: testingGHA
+      - run : npm version patch
         env:
           LATEST: ${{ steps.latest_version.outputs.latest_tag }}
           LATEST_DATE: ${{ steps.latest_version.outputs.latest_tag_published_at }}
